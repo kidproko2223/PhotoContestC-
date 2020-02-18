@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PhotoContest.Infrastructure.Models.ViewModels.Contest.ContestViewModel>
+@{
+    ViewBag.Title = "My Contests";
+}
+
+<h2 class="text-center">My Contests</h2>
+<div class="row jumbotron">
+    @foreach (var contest in Model)
+    {
+        <div class="col-md-6">@Html.Partial("_MyContestPartial", contest)</div>
+    }
+</div>

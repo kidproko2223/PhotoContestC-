@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PhotoContest.Infrastructure.Models.ViewModels.Contest.ContestViewModel>
+
+<h2 class="text-center">Inactive Contests</h2>
+<div class="row jumbotron">
+    
+    @foreach (var contest in Model)
+    {
+        <div class="col-md-6">
+            @Html.Partial("_InactiveContestPartial", contest)
+        </div>
+    }
+</div>

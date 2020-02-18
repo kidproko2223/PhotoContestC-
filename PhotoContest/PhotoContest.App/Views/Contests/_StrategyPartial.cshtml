@@ -1,0 +1,6 @@
+﻿@model IEnumerable<PhotoContest.Infrastructure.Models.ViewModels.Strategy.StrategyViewModel>
+
+@foreach (var strategy in Model)
+{
+    <option value="@strategy.Id" data-description="@strategy.Description" min="1">@strategy.Name</option>
+}

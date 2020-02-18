@@ -1,0 +1,43 @@
+@model PhotoContest.Infrastructure.Models.ViewModels.Contest.PreviewContestViewModel
+@{
+    ViewBag.Title = "PreviewContest";
+}
+<div class="container">
+    <div class="col-lg-8">
+        @if (Model.CanManage)
+        {
+            @Html.ActionLink("Manage", "ManageContest", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        }
+
+        @if (Model.IsOpenForSubmissions && Model.CanParticipate)
+        {
+            <div class="row well">
+                @using (Html.BeginForm("Join", "Contests", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <span class="btn btn-default btn-file">
+                        Add images to contest<input type="file" multiple name="files[]" id="uploadPictureInput" />
+                    </span>
+                    <input type='submit' id='upload-files' value='Participate' class="btn btn-success"/>
+                    <hr/>
+                    <div id="contestUploadPicturesContainer"></div>
+                }
+            </div>
+        }
+
+        <div class="row">
+            @foreach (var picture in Model.Pictures)
+            {
+                <div class="col-md-4">
+                    @Html.Partial("_FullPicturePartial", picture)
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-md-offset-2">
+            @Html.Partial("_ContestParticipantsPartial", Model)
+        </div>
+    </div>
+</div>

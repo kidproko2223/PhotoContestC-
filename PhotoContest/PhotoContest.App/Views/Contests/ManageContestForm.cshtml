@@ -1,0 +1,43 @@
+﻿@using PhotoContest.Models.Enums
+@model PhotoContest.Infrastructure.Models.BindingModels.Contest.UpdateContestBindingModel
+
+@{
+    ViewBag.Title = "Manage Contest";
+}
+
+<h1 class="text-center">Manage Contest</h1>
+<br />
+<div class="row">
+    <div class="col-sm-8 well bs-component">
+        @Html.Partial("_UpdateContestDataForm")
+        <hr />
+        @if (Model.ParticipationStrategy.ParticipationStrategyType == ParticipationStrategyType.Closed || Model.VotingStrategy.VotingStrategyType == VotingStrategyType.Closed)
+        {
+            @Html.Partial("_InviteUsersFormPartial")
+        }
+        <div class="finish-contest pull-right">
+            @Html.ActionLink("Finalize", "FinalizeContest", "Contests", new { id = Model.Id },
+                new { onclick = "return confirm('Are you sure you want to finalize this contest?');", @class = "btn btn-success" })
+
+            @Html.ActionLink("Dismiss", "DismissContest", "Contests", new { id = Model.Id },
+                new { onclick = "return confirm('Are you sure you want to dismiss this contest?');", @class = "btn btn-danger" })
+        </div>
+    </div>
+    <div class="col-sm-4">
+        @if (Model.Status == ContestStatus.Active)
+        {
+            <div class="well bs-component">
+                @using (Html.BeginForm("AddRewards", "Contests", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <h2 class="text-center">Manage rewards</h2>
+                    <div>
+                        @Ajax.ActionLink("Add reward", "GetRewardPartial", "Contests", new AjaxOptions() { HttpMethod = "GET", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "manageRewardsContainer", }, new { @class = "btn btn-danger" })
+                        <input type="submit" value="Save Rewards" class="btn btn-info pull-right" />
+                    </div>
+                    <hr />
+                    <div id="manageRewardsContainer"></div>
+                }
+            </div>
+        }
+    </div>
+</div>

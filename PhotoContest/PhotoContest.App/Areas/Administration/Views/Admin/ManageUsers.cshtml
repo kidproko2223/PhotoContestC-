@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PhotoContest.Infrastructure.Models.ViewModels.User.FullUserViewModel>
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<h2>ManageUsers</h2>
+
+<div class="row">
+    @using (Html.BeginForm("GetUserDetails", "Admin", FormMethod.Post))
+    {
+        @*@(Html.Kendo()
+    .AutoComplete()
+    .Name("searchUsers")
+    .Placeholder("Search by username...")
+    .MinLength(2)
+    .DataTextField("UserName")
+    .DataSource(dataSource =>
+    {
+        dataSource
+            .Read(x => x.Action("SearchByUsername", "Admin")
+            .Data("adminManager.onUserSearchData"))
+            .ServerFiltering(true);*@
+    }))
+
+        <input type="submit" value="View Details" class="btn btn-primary"/>
+    }
+</div>

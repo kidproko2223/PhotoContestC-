@@ -1,0 +1,43 @@
+﻿@using PhotoContest.App.Areas.Administration.Models.ViewModels
+@{
+    ViewBag.Title = "ManageContests";
+}
+
+<h2>ManageContests</h2>
+
+@*@(Html.Kendo()
+      .Grid<ManageContestViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id);
+          columns.Bound(c => c.Title);
+          columns.Bound(c => c.Description);
+          columns.Bound(c => c.Organizator);
+          columns.Bound(c => c.Status).Title("Status");
+          columns.Bound(c => c.IsOpenForSubmissions).Title("Open for Subm.");
+          columns.Bound(c => c.ParticipationStrategyType).Title("ParticipationType");
+          columns.Bound(c => c.VotingStrategyType).Title("VotingType");
+          columns.Bound(c => c.DeadlineStrategyType).Title("DeadlineType");
+          columns.Command(c => c.Edit());
+          columns.Command(c => c.Destroy());
+      })
+      .Sortable()
+      .Pageable(pageable =>
+      {
+          pageable.PageSizes(true);
+          pageable.Refresh(true);
+      })
+      .Editable(edit => edit.Mode(GridEditMode.PopUp))
+      .DataSource(dataSource =>
+            dataSource
+            .Ajax()
+            .Model(model =>
+            {
+                model.Id(m => m.Id);
+                model.Field(m => m.Id).Editable(false);
+            })
+            .Read(read => read.Action("ReadContests", "Admin"))
+            .Update(update => update.Action("EditContest", "Admin"))
+            .Destroy(destroy => destroy.Action("DestroyContest", "Admin"))
+      ))*@
